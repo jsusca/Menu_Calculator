@@ -40,20 +40,21 @@ while running:
     # Split user input into list of item numbers
     choice = split(choice)
 
-    # Iterate through list of user-input item numbers, and add
-    # corresponding dictionaries (item name: item price) to a list
-    for num in choice:
-        if num not in order:
-            order[num] = menu[num].copy()
-        order[num]['quantity_ordered'] += 1
-        order[num]['total_price'] += order[num]['price']
+    for num in choice:  # Iterate through list of user-input item numbers
+        if num not in order:  # If number is not in order
+            order[num] = menu[num].copy()  # Add copy of item dictionary to order dictionary
+        order[num]['quantity_ordered'] += 1  # If item choice is in order, increment item quantity
+        order[num]['total_price'] += order[num]['price']  # And add item price to total_price value
 
+    print(f'\n Item name     Price        Quantity      Total Price')
+
+    # Print [item name, item price, number of items ordered, total price of quantity ordered]
     for item in order.values():
-        overall_total += item['total_price']
+        overall_total += item['total_price']  # Add item total_prices to overall__total
         n = item['name']
         q = item['quantity_ordered']
         p = item['price']
         t = item['total_price']
-        print(f'{n: <15}{p:<15.2f}{q: <15}{t:<15.2f}')
+        print(f'{n: <15}${p:<15.2f}{q: <15}${t:<15.2f}')
 
-    print(f'The order total is ${overall_total:0.2f}')
+    print(f'     --- The order total is ${overall_total:0.2f} ---\n')
