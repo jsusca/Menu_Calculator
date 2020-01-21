@@ -1,3 +1,6 @@
+import re
+
+
 # Define function to split user input into list of characters
 def split(user_input):
     return list(user_input)
@@ -36,6 +39,14 @@ while running:
     choice = input("\nPlease enter order as a series of item numbers without any spaces.\nFor example, to order "
                    "a hamburger with fries and a small drink, \nyou would type: 239, and the program would output "
                    "the total cost of $8.75.\n")
+
+    # Scrub user input so choice is only ints
+    choice = re.sub(r'[^\d]', '', choice)
+    choice = re.sub(r'0', '', choice)
+
+    # Restart program if user doesn't input only ints
+    if choice == '':
+        continue
 
     # Split user input into list of item numbers
     choice = split(choice)
